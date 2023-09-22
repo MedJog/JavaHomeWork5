@@ -27,47 +27,44 @@ public class PhoneBook {
         phoneBook.put(136, "Иванов");
         phoneBook.put(137, "Аронов");
         //System.out.print("Телефонная книга: \n");
-        //phoneBook.forEach((k,v)->System.out.print(v+":  "+k+", \n"));  // вывод на экран
+        //phoneBook.forEach((k,v)->System.out.print(v+":  "+k+", \n"));             // вывод на экран
 
-        Collection<String> allSurnames = phoneBook.values(); // получаем все значения (все фамилии) phoneBook
-        System.out.println(allSurnames);
-        Map<String, Integer> countOfphones = new HashMap<>(); // фамилии + количество телефонов
-        for (String surname : allSurnames) { // перебираем фамилии
+        Collection<String> allSurnames = phoneBook.values();                         // получаем все значения (все фамилии) phoneBook
+        //System.out.println(allSurnames);
+        Map<String, Integer> countOfphones = new HashMap<>();                     // фамилии + количество телефонов
+        for (String surname : allSurnames) {                                        // перебираем фамилии
             int countPhones = 0;
-            //System.out.println(surname + ": ");
-            for (Map.Entry<Integer, String> element : phoneBook.entrySet()) { // перебираем phoneBook
+            for (Map.Entry<Integer, String> element : phoneBook.entrySet()) {   // перебираем phoneBook
                 if (surname == element.getValue()) {
-                    //element.getKey();
-                    countPhones++; // считаем количество телефонов
+                    countPhones++;                                              // считаем количество телефонов
                 }
             }
-            //System.out.println(countPhones);
             countOfphones.put(surname, countPhones);
         }
-        System.out.println("countOfphones: " + countOfphones);
-        ArrayList<Integer> countPhones = new ArrayList<>(); //создаём ArrayList для количества телефонов
+        // System.out.println("countOfphones: " + countOfphones);
+        ArrayList<Integer> countPhones = new ArrayList<>();                         //создаём ArrayList для количества телефонов
         Arrays.stream(countOfphones.values().toArray()).forEach(n -> countPhones.add((Integer) n)); //добавляем все значения в новый ArrayList
-        Set<Integer> set = new HashSet<>(countPhones);
+        Set<Integer> set = new HashSet<>(countPhones);                      // удаление повторяющихся элементов
         countPhones.clear();
         countPhones.addAll(set);
-        Collections.sort(countPhones, Collections.reverseOrder()); // сортировка по убыванию
-        System.out.println(countPhones);
-        ArrayList<String> listSurnames = new ArrayList<>(); // список фамилий по убыванию телефонов
+        Collections.sort(countPhones, Collections.reverseOrder());          // сортировка по убыванию
+        //System.out.println(countPhones);
+        ArrayList<String> listSurnames = new ArrayList<>();                 // список фамилий по убыванию телефонов
         for (Integer el : countPhones) {
             for (Map.Entry<String, Integer> element : countOfphones.entrySet()) {
                 if (el == element.getValue()) {
-                    System.out.println(element.getKey());
+                    //System.out.println(element.getKey());
                     listSurnames.add(element.getKey());
                 }
             }
         }
-        System.out.println(listSurnames);
+        //System.out.println(listSurnames);
 
-        for (String surname : listSurnames) {
-            System.out.println(surname + ": "); // перебираем фамилии
-            for (Map.Entry<Integer, String> element : phoneBook.entrySet()) {
+        for (String surname : listSurnames) {                                   // перебираем фамилии
+            System.out.println(surname + ": ");                                 // вывод фамилии на экран
+            for (Map.Entry<Integer, String> element : phoneBook.entrySet()) {    // перебираем телефонную книгу
                 if (surname == element.getValue()) {
-                    System.out.println(element.getKey());
+                    System.out.println(element.getKey());                          // вывод на экран всех телефонов у данного контакта
                 }
             }
         }
